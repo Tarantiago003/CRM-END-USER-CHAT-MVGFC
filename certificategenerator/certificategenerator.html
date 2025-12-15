@@ -207,7 +207,19 @@
 
         .certificate-header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
+        }
+
+        .cert-logo {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px;
+        }
+
+        .cert-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
         .cert-school-name {
@@ -263,7 +275,7 @@
 
         .certificate-footer {
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
             align-items: end;
             margin-top: 60px;
             padding-top: 30px;
@@ -279,10 +291,14 @@
             flex: 1;
         }
 
-        .seal-block {
-            flex: 1;
-            display: flex;
-            justify-content: center;
+        .signature-image {
+            height: 60px;
+            margin-bottom: 5px;
+        }
+
+        .signature-image img {
+            height: 100%;
+            object-fit: contain;
         }
 
         .signature-line {
@@ -309,31 +325,6 @@
             font-size: 16px;
             color: #666;
             font-family: 'Courier New', monospace;
-        }
-
-        .seal {
-            width: 80px;
-            height: 80px;
-            border: 3px solid #1B5E20;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            background: white;
-        }
-
-        .seal-inner {
-            width: 60px;
-            height: 60px;
-            border: 2px solid #2E7D32;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 10px;
-            color: #1B5E20;
-            font-weight: 700;
         }
 
         .download-btn {
@@ -417,12 +408,15 @@
                         >
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Reference Number</label>
+                        <label class="form-label">Reference Number (16 digits)</label>
                         <input 
                             type="text" 
                             class="form-input" 
                             id="refNumber" 
-                            placeholder="e.g, 2024-001"
+                            placeholder="e.g, 2024000100000001"
+                            maxlength="16"
+                            pattern="[0-9]{16}"
+                            title="Please enter exactly 16 digits"
                             required
                         >
                     </div>
@@ -444,6 +438,9 @@
 
                 <!-- Certificate Header -->
                 <div class="certificate-header">
+                    <div class="cert-logo">
+                        <img src="https://i.imgur.com/bPZQXKZ.png" alt="MVGFCI Logo">
+                    </div>
                     <div class="cert-school-name">Manuel V. Gallego Foundation Colleges Inc.</div>
                     <div class="cert-title">Certificate of Acceptance</div>
                     <div class="cert-subtitle">This is to certify that</div>
@@ -465,16 +462,13 @@
                 <div class="certificate-footer">
                     <div class="ref-block">
                         <div class="ref-label">Ref No:</div>
-                        <div class="ref-number" id="certRef">________</div>
-                    </div>
-
-                    <div class="seal-block">
-                        <div class="seal">
-                            <div class="seal-inner">MVGFCI</div>
-                        </div>
+                        <div class="ref-number" id="certRef">________________</div>
                     </div>
 
                     <div class="signature-block">
+                        <div class="signature-image">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='60' viewBox='0 0 200 60'%3E%3Cpath d='M 10 40 Q 30 10, 50 40 T 90 40 Q 110 20, 130 40 T 170 40' stroke='%231B5E20' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E" alt="Signature">
+                        </div>
                         <div class="signature-line"></div>
                         <div class="signature-label">Authorized Signature</div>
                     </div>
@@ -501,6 +495,12 @@
 
             if (!fullName || !refNumber) {
                 alert('Please fill in all fields');
+                return;
+            }
+
+            // Validate reference number is 16 digits
+            if (!/^\d{16}$/.test(refNumber)) {
+                alert('Reference number must be exactly 16 digits');
                 return;
             }
 
@@ -549,33 +549,42 @@
             pdf.line(267, 195, 282, 195);
             pdf.line(282, 195, 282, 180);
 
+            // Add logo (you can replace this URL with your actual logo)
+            const logoUrl = 'https://i.imgur.com/bPZQXKZ.png';
+            try {
+                const img = await loadImage(logoUrl);
+                pdf.addImage(img, 'PNG', 133, 20, 30, 30);
+            } catch (e) {
+                console.log('Logo loading skipped');
+            }
+
             // School Name
             pdf.setFontSize(10);
             pdf.setTextColor(100, 100, 100);
-            pdf.text('MANUEL V. GALLEGO FOUNDATION COLLEGES INC.', 148.5, 35, { align: 'center' });
+            pdf.text('MANUEL V. GALLEGO FOUNDATION COLLEGES INC.', 148.5, 58, { align: 'center' });
 
             // Certificate Title
             pdf.setFontSize(32);
             pdf.setTextColor(27, 94, 32);
             pdf.setFont(undefined, 'bold');
-            pdf.text('Certificate of Acceptance', 148.5, 50, { align: 'center' });
+            pdf.text('Certificate of Acceptance', 148.5, 70, { align: 'center' });
 
             // Subtitle
             pdf.setFontSize(14);
             pdf.setTextColor(100, 100, 100);
             pdf.setFont(undefined, 'italic');
-            pdf.text('This is to certify that', 148.5, 60, { align: 'center' });
+            pdf.text('This is to certify that', 148.5, 80, { align: 'center' });
 
             // Recipient Name
             pdf.setFontSize(24);
             pdf.setTextColor(44, 62, 80);
             pdf.setFont(undefined, 'bold');
-            pdf.text(fullName, 148.5, 80, { align: 'center' });
+            pdf.text(fullName, 148.5, 100, { align: 'center' });
 
             // Underline for name
             pdf.setDrawColor(27, 94, 32);
             pdf.setLineWidth(0.5);
-            pdf.line(60, 82, 237, 82);
+            pdf.line(60, 102, 237, 102);
 
             // Certificate Text
             pdf.setFontSize(11);
@@ -585,9 +594,9 @@
             const text2 = 'Manuel V. Gallego Foundation Colleges Inc. for the current academic year.';
             const text3 = 'This certificate serves as proof of admission and enrollment in the institution.';
             
-            pdf.text(text1, 148.5, 95, { align: 'center' });
-            pdf.text(text2, 148.5, 102, { align: 'center' });
-            pdf.text(text3, 148.5, 109, { align: 'center' });
+            pdf.text(text1, 148.5, 115, { align: 'center' });
+            pdf.text(text2, 148.5, 122, { align: 'center' });
+            pdf.text(text3, 148.5, 129, { align: 'center' });
 
             // Reference Number
             pdf.setFontSize(10);
@@ -595,16 +604,18 @@
             pdf.setFont(undefined, 'bold');
             pdf.text('Ref No:', 30, 170);
             pdf.setFont(undefined, 'normal');
+            pdf.setFontSize(12);
             pdf.text(refNumber, 30, 176);
 
-            // Seal
+            // Sample Signature
             pdf.setDrawColor(27, 94, 32);
-            pdf.setLineWidth(1);
-            pdf.circle(148.5, 165, 12);
-            pdf.circle(148.5, 165, 10);
-            pdf.setFontSize(8);
-            pdf.setFont(undefined, 'bold');
-            pdf.text('MVGFCI', 148.5, 167, { align: 'center' });
+            pdf.setLineWidth(0.8);
+            // Draw a sample signature curve
+            pdf.line(220, 165, 230, 160);
+            pdf.line(230, 160, 240, 165);
+            pdf.line(240, 165, 250, 158);
+            pdf.line(250, 158, 260, 163);
+            pdf.line(260, 163, 270, 160);
 
             // Signature Line
             pdf.setLineWidth(0.5);
@@ -625,6 +636,17 @@
             // Save PDF
             pdf.save(`Certificate_${fullName.replace(/\s+/g, '_')}_${refNumber}.pdf`);
         });
+
+        // Helper function to load image
+        function loadImage(url) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.crossOrigin = 'Anonymous';
+                img.onload = () => resolve(img);
+                img.onerror = reject;
+                img.src = url;
+            });
+        }
     </script>
 </body>
 </html>
