@@ -540,7 +540,8 @@
                             <img id="signatureImg" src="signature (2).png" alt="Signature" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27200%27 height=%2760%27 viewBox=%270 0 200 60%27%3E%3Cpath d=%27M 10 40 Q 30 10, 50 40 T 90 40 Q 110 20, 130 40 T 170 40%27 stroke=%27%231B5E20%27 stroke-width=%272%27 fill=%27none%27 stroke-linecap=%27round%27/%3E%3C/svg%3E'">
                         </div>
                         <div class="signature-line"></div>
-                        <div class="signature-label">Authorized Signature</div>
+                        <div class="signature-label">Arjay A. Maniego, LPT, MA</div>
+                        <div class="signature-label">Head - Gallegan Care Team</div>
                     </div>
                 </div>
             </div>
@@ -677,30 +678,30 @@
             pdf.text('MANUEL V. GALLEGO FOUNDATION COLLEGES INC.', 148.5, 56, { align: 'center' });
 
             // Certificate Title
-            pdf.setFontSize(26);
+            pdf.setFontSize(24);
             pdf.setTextColor(27, 94, 32);
             pdf.setFont(undefined, 'bold');
-            pdf.text('CERTIFICATE OF CONFIRMATION', 148.5, 66, { align: 'center' });
+            pdf.text('CERTIFICATE OF CONFIRMATION', 148.5, 65, { align: 'center' });
 
             // Subtitle
-            pdf.setFontSize(11);
+            pdf.setFontSize(10);
             pdf.setTextColor(100, 100, 100);
             pdf.setFont(undefined, 'normal');
-            pdf.text('This certificate is proudly presented to:', 148.5, 74, { align: 'center' });
+            pdf.text('This certificate is proudly presented to:', 148.5, 72, { align: 'center' });
 
             // Recipient Name
-            pdf.setFontSize(20);
+            pdf.setFontSize(18);
             pdf.setTextColor(44, 62, 80);
             pdf.setFont(undefined, 'bold');
-            pdf.text(fullName, 148.5, 86, { align: 'center' });
+            pdf.text(fullName, 148.5, 83, { align: 'center' });
 
             // Underline
             pdf.setDrawColor(27, 94, 32);
             pdf.setLineWidth(0.5);
-            pdf.line(60, 88, 237, 88);
+            pdf.line(70, 85, 227, 85);
 
             // Certificate Text
-            pdf.setFontSize(9);
+            pdf.setFontSize(8.5);
             pdf.setTextColor(100, 100, 100);
             pdf.setFont(undefined, 'normal');
             
@@ -712,14 +713,14 @@
                 'comprehensive benefits of the Alagang Gallegan program for the duration of their four-year degree, including:'
             ];
             
-            let yPos = 98;
+            let yPos = 94;
             textLines.forEach(line => {
                 pdf.text(line, 148.5, yPos, { align: 'center' });
-                yPos += 5;
+                yPos += 4.5;
             });
 
             // Benefits - centered
-            yPos += 2;
+            yPos += 1;
             const benefits = [
                 '• Free Academic Mentors and Coaches: Priority mentorship from dedicated academic mentors.',
                 '• ENROLLMENT to EMPLOYMENT: 4 Years Validity',
@@ -727,42 +728,42 @@
                 '• No Entrance Examination for Admission: Waiver of all entrance examination requirements and hidden charges.'
             ];
             
-            pdf.setFontSize(8);
+            pdf.setFontSize(7.5);
             benefits.forEach(benefit => {
                 pdf.text(benefit, 148.5, yPos, { align: 'center', maxWidth: 200 });
-                yPos += 5;
+                yPos += 4.5;
             });
 
             // Date
-            yPos += 5;
-            pdf.setFontSize(9);
+            yPos += 3;
+            pdf.setFontSize(8.5);
             pdf.text(`Given this ${day} day of ${month}, ${year}.`, 148.5, yPos, { align: 'center' });
 
             // Validation box
-            yPos += 8;
+            yPos += 6;
             pdf.setDrawColor(27, 94, 32);
             pdf.setFillColor(240, 248, 240);
-            pdf.rect(48.5, yPos, 200, 20, 'FD');
+            pdf.rect(48.5, yPos, 200, 18, 'FD');
             
-            pdf.setFontSize(9);
+            pdf.setFontSize(8.5);
             pdf.setTextColor(27, 94, 32);
             pdf.setFont(undefined, 'bold');
-            pdf.text('VALIDATION & ENROLLMENT SUMMARY', 148.5, yPos + 5, { align: 'center' });
+            pdf.text('FOR CLAIMING AND VALIDATION', 148.5, yPos + 4.5, { align: 'left' });
             
-            pdf.setFontSize(8);
+            pdf.setFontSize(7.5);
             pdf.setTextColor(100, 100, 100);
             pdf.setFont(undefined, 'normal');
-            pdf.text('• Deadline for Claim: May 1 - July 30, 2026', 148.5, yPos + 10, { align: 'center' });
-            pdf.text('• Instructions: Present this certificate to the Marketing Office to finalize your enrollment.', 148.5, yPos + 15, { align: 'center' });
+            pdf.text('• Deadline for Claim: May 1 - July 30, 2026', 148.5, yPos + 9, { align: 'center' });
+            pdf.text('• Instructions: Present this certificate to the Marketing Office to finalize your enrollment.', 148.5, yPos + 13.5, { align: 'center' });
 
             // Reference Number
-            pdf.setFontSize(9);
+            pdf.setFontSize(8.5);
             pdf.setTextColor(44, 62, 80);
             pdf.setFont(undefined, 'bold');
-            pdf.text('Ref No:', 30, 175);
+            pdf.text('Ref No:', 30, 178);
             pdf.setFont(undefined, 'normal');
-            pdf.setFontSize(10);
-            pdf.text(refNumber, 30, 180);
+            pdf.setFontSize(9);
+            pdf.text(refNumber, 30, 183);
 
             // Try to add signature
             try {
@@ -774,26 +775,26 @@
                     const ctx = canvas.getContext('2d');
                     ctx.drawImage(signImg, 0, 0);
                     const signData = canvas.toDataURL('image/png');
-                    pdf.addImage(signData, 'PNG', 220, 158, 50, 14);
+                    pdf.addImage(signData, 'PNG', 215, 163, 50, 14);
                 }
             } catch (e) {
                 console.log('Signature not added:', e);
                 // Fallback signature line
                 pdf.setDrawColor(27, 94, 32);
                 pdf.setLineWidth(0.8);
-                pdf.line(220, 165, 230, 162);
-                pdf.line(230, 162, 240, 165);
-                pdf.line(240, 165, 250, 160);
-                pdf.line(250, 160, 260, 163);
-                pdf.line(260, 163, 270, 162);
+                pdf.line(215, 170, 225, 167);
+                pdf.line(225, 167, 235, 170);
+                pdf.line(235, 170, 245, 165);
+                pdf.line(245, 165, 255, 168);
+                pdf.line(255, 168, 265, 167);
             }
 
             // Signature Line
             pdf.setLineWidth(0.5);
-            pdf.line(220, 172, 270, 172);
+            pdf.line(215, 177, 265, 177);
             pdf.setFontSize(7);
             pdf.setTextColor(100, 100, 100);
-            pdf.text('AUTHORIZED SIGNATURE', 245, 177, { align: 'center' });
+            pdf.text('AUTHORIZED SIGNATURE', 240, 182, { align: 'center' });
 
             // Save PDF
             pdf.save(`Certificate_${fullName.replace(/\s+/g, '_')}_${refNumber.replace(/-/g, '')}.pdf`);
@@ -801,4 +802,3 @@
     </script>
 </body>
 </html>
-
