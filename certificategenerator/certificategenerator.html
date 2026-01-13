@@ -463,8 +463,8 @@
                             type="text" 
                             class="form-input" 
                             id="refNumber" 
-                            placeholder="e.g., ABCD-1234-EF567"
-                            maxlength="15"
+                            placeholder="e.g., ABCD-1234-EFGH-5"
+                            maxlength="16"
                             required
                         >
                     </div>
@@ -520,7 +520,7 @@
                         </div>
 
                         <div class="validation-box">
-                            <h4>VALIDATION & ENROLLMENT SUMMARY</h4>
+                            <h4>FOR CLAIMING AND VALIDATION</h4>
                             <ul>
                                 <li><strong>Deadline for Claim:</strong> May 1 - July 30, 2026</li>
                                 <li><strong>Instructions:</strong> Present this certificate to the Marketing Office to finalize your enrollment.</li>
@@ -532,7 +532,7 @@
                 <div class="certificate-footer">
                     <div class="ref-block">
                         <div class="ref-label">Ref No:</div>
-                        <div class="ref-number" id="certRef">____-____-_____</div>
+                        <div class="ref-number" id="certRef">____-____-____-_</div>
                     </div>
 
                     <div class="signature-block">
@@ -540,8 +540,8 @@
                             <img id="signatureImg" src="signature (2).png" alt="Signature" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27200%27 height=%2760%27 viewBox=%270 0 200 60%27%3E%3Cpath d=%27M 10 40 Q 30 10, 50 40 T 90 40 Q 110 20, 130 40 T 170 40%27 stroke=%27%231B5E20%27 stroke-width=%272%27 fill=%27none%27 stroke-linecap=%27round%27/%3E%3C/svg%3E'">
                         </div>
                         <div class="signature-line"></div>
-                        <div class="signature-label">Arjay A. Maniego, LPT, MA</div>
-                        <div class="signature-label">Head - Gallegan Care Team</div>
+                        <div class="signature-label">Arjay A. Maniego</div>
+                        <div class="signature-label">HEAD - Gallegan Care Team</div>
                     </div>
                 </div>
             </div>
@@ -560,7 +560,7 @@
         const refNumberInput = document.getElementById('refNumber');
         const downloadBtn = document.getElementById('downloadBtn');
 
-        // Format reference number with dashes
+        // Format reference number with dashes (4-4-4-1 format)
         refNumberInput.addEventListener('input', function(e) {
             let value = e.target.value.replace(/[^A-Za-z0-9]/g, '').toUpperCase();
             
@@ -570,7 +570,7 @@
             
             let formatted = '';
             for (let i = 0; i < value.length; i++) {
-                if (i === 4 || i === 8) {
+                if (i === 4 || i === 8 || i === 12) {
                     formatted += '-';
                 }
                 formatted += value[i];
@@ -719,7 +719,7 @@
                 yPos += 4.5;
             });
 
-            // Benefits - centered
+            // Benefits - centered with aligned bullets
             yPos += 1;
             const benefits = [
                 '• Free Academic Mentors and Coaches: Priority mentorship from dedicated academic mentors.',
@@ -729,8 +729,9 @@
             ];
             
             pdf.setFontSize(7.5);
+            const startX = 90; // Left-aligned starting point for benefits
             benefits.forEach(benefit => {
-                pdf.text(benefit, 148.5, yPos, { align: 'center', maxWidth: 200 });
+                pdf.text(benefit, startX, yPos, { maxWidth: 117 });
                 yPos += 4.5;
             });
 
@@ -748,7 +749,7 @@
             pdf.setFontSize(8.5);
             pdf.setTextColor(27, 94, 32);
             pdf.setFont(undefined, 'bold');
-            pdf.text('FOR CLAIMING AND VALIDATION', 148.5, yPos + 4.5, { align: 'left' });
+            pdf.text('FOR CLAIMING AND VALIDATION', 148.5, yPos + 4.5, { align: 'center' });
             
             pdf.setFontSize(7.5);
             pdf.setTextColor(100, 100, 100);
@@ -794,7 +795,8 @@
             pdf.line(215, 177, 265, 177);
             pdf.setFontSize(7);
             pdf.setTextColor(100, 100, 100);
-            pdf.text('AUTHORIZED SIGNATURE', 240, 182, { align: 'center' });
+            pdf.text('Arjay A. Maniego, LPT, MA', 240, 182, { align: 'center' });
+            pdf.text('Head - Gallegan Care Team', 240, 186, { align: 'center' });
 
             // Save PDF
             pdf.save(`Certificate_${fullName.replace(/\s+/g, '_')}_${refNumber.replace(/-/g, '')}.pdf`);
