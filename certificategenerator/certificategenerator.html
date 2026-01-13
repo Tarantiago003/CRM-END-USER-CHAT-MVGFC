@@ -28,7 +28,6 @@
             overflow: hidden;
         }
 
-        /* Header */
         .header {
             background: linear-gradient(135deg, #1B5E20, #2E7D32);
             color: white;
@@ -62,11 +61,6 @@
             border-bottom-color: #FFD700;
         }
 
-        .nav-tab:hover {
-            opacity: 0.8;
-        }
-
-        /* Form Section */
         .form-section {
             padding: 50px 40px;
         }
@@ -88,6 +82,10 @@
         .form-group {
             display: flex;
             flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
         }
 
         .form-label {
@@ -136,11 +134,6 @@
             background: linear-gradient(135deg, #2E7D32, #388E3C);
         }
 
-        .generate-btn:active {
-            transform: translateY(0);
-        }
-
-        /* Certificate Preview Section */
         .preview-section {
             padding: 50px 40px;
             background: #F9F9F9;
@@ -159,7 +152,7 @@
             background: white;
             border: 8px solid #1B5E20;
             border-radius: 12px;
-            padding: 60px 40px;
+            padding: 40px;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
             position: relative;
             max-width: 800px;
@@ -207,13 +200,13 @@
 
         .certificate-header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         .cert-logo {
-            width: 100px;
-            height: 100px;
-            margin: 0 auto 20px;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 15px;
         }
 
         .cert-logo img {
@@ -223,7 +216,7 @@
         }
 
         .cert-school-name {
-            font-size: 14px;
+            font-size: 12px;
             color: #666;
             margin-bottom: 5px;
             text-transform: uppercase;
@@ -231,54 +224,113 @@
         }
 
         .cert-title {
-            font-size: 36px;
+            font-size: 30px;
             font-weight: 700;
             color: #1B5E20;
             margin-bottom: 10px;
         }
 
         .cert-subtitle {
-            font-size: 16px;
+            font-size: 14px;
             color: #666;
-            font-style: italic;
         }
 
         .certificate-body {
             text-align: center;
-            margin: 40px 0;
-        }
-
-        .presented-text {
-            font-size: 16px;
-            color: #666;
-            margin-bottom: 15px;
+            margin: 30px 0;
         }
 
         .recipient-name {
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 700;
             color: #2C3E50;
-            margin: 20px 0;
-            padding: 15px 0;
+            margin: 15px 0;
+            padding: 12px 0;
             border-bottom: 2px solid #1B5E20;
             display: inline-block;
             min-width: 400px;
         }
 
         .certificate-text {
-            font-size: 15px;
+            font-size: 13px;
             color: #666;
             line-height: 1.8;
-            margin: 30px auto;
-            max-width: 600px;
+            margin: 25px auto;
+            max-width: 700px;
+            text-align: left;
+        }
+
+        .certificate-text strong {
+            color: #1B5E20;
+        }
+
+        .benefits-list {
+            list-style: none;
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        .benefits-list li {
+            margin: 8px 0;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .benefits-list li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #1B5E20;
+            font-weight: bold;
+        }
+
+        .date-section {
+            margin: 20px 0;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .validation-box {
+            background: #F0F8F0;
+            border-left: 4px solid #1B5E20;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .validation-box h4 {
+            color: #1B5E20;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .validation-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .validation-box li {
+            margin: 6px 0;
+            font-size: 12px;
+            color: #666;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .validation-box li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #1B5E20;
+            font-weight: bold;
         }
 
         .certificate-footer {
             display: flex;
             justify-content: space-between;
             align-items: end;
-            margin-top: 60px;
-            padding-top: 30px;
+            margin-top: 40px;
+            padding-top: 20px;
         }
 
         .signature-block {
@@ -308,21 +360,21 @@
         }
 
         .signature-label {
-            font-size: 12px;
+            font-size: 11px;
             color: #666;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
         .ref-label {
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 600;
             color: #2C3E50;
             margin-bottom: 5px;
         }
 
         .ref-number {
-            font-size: 16px;
+            font-size: 14px;
             color: #666;
             font-family: 'Courier New', monospace;
         }
@@ -350,7 +402,6 @@
             background: #1976D2;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .form-grid {
                 grid-template-columns: 1fr;
@@ -361,12 +412,12 @@
             }
 
             .cert-title {
-                font-size: 28px;
+                font-size: 24px;
             }
 
             .recipient-name {
-                font-size: 24px;
-                min-width: 300px;
+                font-size: 20px;
+                min-width: 250px;
             }
 
             .certificate-footer {
@@ -383,7 +434,6 @@
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
         <div class="header">
             <h1>MVGFCI Certificate Generator</h1>
             <div class="nav-tabs">
@@ -391,7 +441,6 @@
             </div>
         </div>
 
-        <!-- Form Section -->
         <div class="form-section">
             <h2 class="section-title">Enter Details</h2>
             <form id="certificateForm">
@@ -402,20 +451,27 @@
                             type="text" 
                             class="form-input" 
                             id="fullName" 
-                            placeholder="e.g, Jane Doe"
+                            placeholder="e.g., Jane Doe"
                             required
                         >
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Reference Number (16 digits)</label>
+                        <label class="form-label">Reference Number (16 characters)</label>
                         <input 
                             type="text" 
                             class="form-input" 
                             id="refNumber" 
-                            placeholder="e.g, 2024000100000001"
-                            maxlength="16"
-                            pattern="[0-9]{16}"
-                            title="Please enter exactly 16 digits"
+                            placeholder="e.g., ABCD-1234-EFGH-5678"
+                            maxlength="19"
+                            required
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Certificate Date</label>
+                        <input 
+                            type="date" 
+                            class="form-input" 
+                            id="certDate" 
                             required
                         >
                     </div>
@@ -424,49 +480,62 @@
             </form>
         </div>
 
-        <!-- Certificate Preview Section -->
         <div class="preview-section" id="previewSection" style="display: none;">
             <h2 class="preview-title">Your Certificate</h2>
             
             <div class="certificate-container" id="certificate">
-                <!-- Decorative Corners -->
                 <div class="certificate-corners corner-tl"></div>
                 <div class="certificate-corners corner-tr"></div>
                 <div class="certificate-corners corner-bl"></div>
                 <div class="certificate-corners corner-br"></div>
 
-                <!-- Certificate Header -->
                 <div class="certificate-header">
                     <div class="cert-logo">
                         <img src="mvgfci-logo.png" alt="MVGFCI Logo" onerror="this.style.display='none'">
                     </div>
                     <div class="cert-school-name">Manuel V. Gallego Foundation Colleges Inc.</div>
-                    <div class="cert-title">Certificate of Acceptance</div>
-                    <div class="cert-subtitle">This is to certify that</div>
+                    <div class="cert-title">CERTIFICATE OF CONFIRMATION</div>
+                    <div class="cert-subtitle">This certificate is proudly presented to:</div>
                 </div>
 
-                <!-- Certificate Body -->
                 <div class="certificate-body">
                     <div class="recipient-name" id="certName">[Name]</div>
                     
                     <div class="certificate-text">
-                        Has been officially accepted and enrolled as a student of 
-                        <strong>Manuel V. Gallego Foundation Colleges Inc.</strong> 
-                        for the current academic year. This certificate serves as proof of admission 
-                        and enrollment in the institution.
+                        For having successfully passed the rigorous selection process and demonstrating the academic potential and character required of an <strong>Alagang Gallegan Scholar</strong>.
+                        <br><br>
+                        By virtue of this award, the scholar is entitled to a <strong>100% Tuition Discount</strong> and full access to the comprehensive benefits of the <strong>Alagang Gallegan program</strong> for the duration of their four-year degree, including:
+                        
+                        <ul class="benefits-list">
+                            <li><strong>Free Academic Mentors and Coaches:</strong> Priority mentorship from dedicated academic mentors.</li>
+                            <li><strong>ENROLLMENT to EMPLOYMENT:</strong> 4 Years Validity</li>
+                            <li><strong>Fully Air Conditioned Facilities:</strong> Full access to air-conditioned learning environments.</li>
+                            <li><strong>No Entrance Examination for Admission:</strong> Waiver of all entrance examination requirements and hidden charges.</li>
+                        </ul>
+                        
+                        <div class="date-section">
+                            Given this <span id="certDay"></span> day of <span id="certMonthYear"></span>.
+                        </div>
+
+                        <div class="validation-box">
+                            <h4>VALIDATION & ENROLLMENT SUMMARY</h4>
+                            <ul>
+                                <li><strong>Deadline for Claim:</strong> May 1 - July 30, 2026</li>
+                                <li><strong>Instructions:</strong> Present this certificate to the Marketing Office to finalize your enrollment.</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Certificate Footer -->
                 <div class="certificate-footer">
                     <div class="ref-block">
                         <div class="ref-label">Ref No:</div>
-                        <div class="ref-number" id="certRef">________________</div>
+                        <div class="ref-number" id="certRef">____-____-____-____</div>
                     </div>
 
                     <div class="signature-block">
                         <div class="signature-image">
-                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='60' viewBox='0 0 200 60'%3E%3Cpath d='M 10 40 Q 30 10, 50 40 T 90 40 Q 110 20, 130 40 T 170 40' stroke='%231B5E20' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E" alt="Signature">
+                            <img id="signatureImg" src="signature.png" alt="Signature" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27200%27 height=%2760%27 viewBox=%270 0 200 60%27%3E%3Cpath d=%27M 10 40 Q 30 10, 50 40 T 90 40 Q 110 20, 130 40 T 170 40%27 stroke=%27%231B5E20%27 stroke-width=%272%27 fill=%27none%27 stroke-linecap=%27round%27/%3E%3C/svg%3E'">
                         </div>
                         <div class="signature-line"></div>
                         <div class="signature-label">Authorized Signature</div>
@@ -483,29 +552,61 @@
         const previewSection = document.getElementById('previewSection');
         const certName = document.getElementById('certName');
         const certRef = document.getElementById('certRef');
+        const certDay = document.getElementById('certDay');
+        const certMonthYear = document.getElementById('certMonthYear');
+        const refNumberInput = document.getElementById('refNumber');
         const downloadBtn = document.getElementById('downloadBtn');
+
+        // Format reference number with dashes
+        refNumberInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/[^A-Za-z0-9]/g, '').toUpperCase();
+            
+            if (value.length > 16) {
+                value = value.substring(0, 16);
+            }
+            
+            let formatted = '';
+            for (let i = 0; i < value.length; i++) {
+                if (i > 0 && i % 4 === 0) {
+                    formatted += '-';
+                }
+                formatted += value[i];
+            }
+            
+            e.target.value = formatted;
+        });
 
         // Generate Certificate
         certificateForm.addEventListener('submit', function(e) {
             e.preventDefault();
 
             const fullName = document.getElementById('fullName').value.trim();
-            const refNumber = document.getElementById('refNumber').value.trim();
+            const refNumber = refNumberInput.value.trim();
+            const certDate = new Date(document.getElementById('certDate').value);
 
-            if (!fullName || !refNumber) {
+            if (!fullName || !refNumber || !certDate) {
                 alert('Please fill in all fields');
                 return;
             }
 
-            // Validate reference number is 16 digits
-            if (!/^\d{16}$/.test(refNumber)) {
-                alert('Reference number must be exactly 16 digits');
+            // Validate reference number (should be 16 alphanumeric characters with dashes)
+            const cleanRef = refNumber.replace(/-/g, '');
+            if (cleanRef.length !== 16 || !/^[A-Z0-9]{16}$/.test(cleanRef)) {
+                alert('Reference number must be exactly 16 alphanumeric characters');
                 return;
             }
 
             // Update certificate
             certName.textContent = fullName;
             certRef.textContent = refNumber;
+            
+            // Format date
+            const day = certDate.getDate();
+            const month = certDate.toLocaleDateString('en-US', { month: 'long' });
+            const year = certDate.getFullYear();
+            
+            certDay.textContent = day;
+            certMonthYear.textContent = `${month}, ${year}`;
 
             // Show preview
             previewSection.style.display = 'block';
@@ -526,9 +627,13 @@
             });
 
             const fullName = document.getElementById('fullName').value;
-            const refNumber = document.getElementById('refNumber').value;
+            const refNumber = refNumberInput.value;
+            const certDate = new Date(document.getElementById('certDate').value);
+            const day = certDate.getDate();
+            const month = certDate.toLocaleDateString('en-US', { month: 'long' });
+            const year = certDate.getFullYear();
 
-            // Set page background
+            // Background
             pdf.setFillColor(255, 255, 255);
             pdf.rect(0, 0, 297, 210, 'F');
 
@@ -548,103 +653,118 @@
             pdf.line(267, 195, 282, 195);
             pdf.line(282, 195, 282, 180);
 
-            // Try to add logo
-            const logoUrl = 'mvgfci-logo.png';
-            try {
-                const img = await loadImage(logoUrl);
-                pdf.addImage(img, 'PNG', 133, 20, 30, 30);
-            } catch (e) {
-                console.log('Logo not found, continuing without logo');
-            }
-
             // School Name
-            pdf.setFontSize(10);
+            pdf.setFontSize(9);
             pdf.setTextColor(100, 100, 100);
-            pdf.text('MANUEL V. GALLEGO FOUNDATION COLLEGES INC.', 148.5, 58, { align: 'center' });
+            pdf.text('MANUEL V. GALLEGO FOUNDATION COLLEGES INC.', 148.5, 30, { align: 'center' });
 
             // Certificate Title
-            pdf.setFontSize(32);
+            pdf.setFontSize(26);
             pdf.setTextColor(27, 94, 32);
             pdf.setFont(undefined, 'bold');
-            pdf.text('Certificate of Acceptance', 148.5, 70, { align: 'center' });
+            pdf.text('CERTIFICATE OF CONFIRMATION', 148.5, 40, { align: 'center' });
 
             // Subtitle
-            pdf.setFontSize(14);
-            pdf.setTextColor(100, 100, 100);
-            pdf.setFont(undefined, 'italic');
-            pdf.text('This is to certify that', 148.5, 80, { align: 'center' });
-
-            // Recipient Name
-            pdf.setFontSize(24);
-            pdf.setTextColor(44, 62, 80);
-            pdf.setFont(undefined, 'bold');
-            pdf.text(fullName, 148.5, 100, { align: 'center' });
-
-            // Underline for name
-            pdf.setDrawColor(27, 94, 32);
-            pdf.setLineWidth(0.5);
-            pdf.line(60, 102, 237, 102);
-
-            // Certificate Text
             pdf.setFontSize(11);
             pdf.setTextColor(100, 100, 100);
             pdf.setFont(undefined, 'normal');
-            const text1 = 'Has been officially accepted and enrolled as a student of';
-            const text2 = 'Manuel V. Gallego Foundation Colleges Inc. for the current academic year.';
-            const text3 = 'This certificate serves as proof of admission and enrollment in the institution.';
-            
-            pdf.text(text1, 148.5, 115, { align: 'center' });
-            pdf.text(text2, 148.5, 122, { align: 'center' });
-            pdf.text(text3, 148.5, 129, { align: 'center' });
+            pdf.text('This certificate is proudly presented to:', 148.5, 48, { align: 'center' });
 
-            // Reference Number
-            pdf.setFontSize(10);
+            // Recipient Name
+            pdf.setFontSize(20);
             pdf.setTextColor(44, 62, 80);
             pdf.setFont(undefined, 'bold');
-            pdf.text('Ref No:', 30, 170);
-            pdf.setFont(undefined, 'normal');
-            pdf.setFontSize(12);
-            pdf.text(refNumber, 30, 176);
+            pdf.text(fullName, 148.5, 60, { align: 'center' });
 
-            // Sample Signature
+            // Underline
+            pdf.setDrawColor(27, 94, 32);
+            pdf.setLineWidth(0.5);
+            pdf.line(60, 62, 237, 62);
+
+            // Certificate Text
+            pdf.setFontSize(9);
+            pdf.setTextColor(100, 100, 100);
+            pdf.setFont(undefined, 'normal');
+            
+            const textLines = [
+                'For having successfully passed the rigorous selection process and demonstrating the academic potential',
+                'and character required of an Alagang Gallegan Scholar.',
+                '',
+                'By virtue of this award, the scholar is entitled to a 100% Tuition Discount and full access to the',
+                'comprehensive benefits of the Alagang Gallegan program for the duration of their four-year degree, including:'
+            ];
+            
+            let yPos = 72;
+            textLines.forEach(line => {
+                pdf.text(line, 148.5, yPos, { align: 'center' });
+                yPos += 5;
+            });
+
+            // Benefits
+            yPos += 2;
+            const benefits = [
+                '• Free Academic Mentors and Coaches: Priority mentorship from dedicated academic mentors.',
+                '• ENROLLMENT to EMPLOYMENT: 4 Years Validity',
+                '• Fully Air Conditioned Facilities: Full access to air-conditioned learning environments.',
+                '• No Entrance Examination for Admission: Waiver of all entrance examination requirements and hidden charges.'
+            ];
+            
+            pdf.setFontSize(8);
+            benefits.forEach(benefit => {
+                pdf.text(benefit, 30, yPos, { maxWidth: 237 });
+                yPos += 5;
+            });
+
+            // Date
+            yPos += 5;
+            pdf.setFontSize(9);
+            pdf.text(`Given this ${day} day of ${month}, ${year}.`, 148.5, yPos, { align: 'center' });
+
+            // Validation box
+            yPos += 8;
+            pdf.setDrawColor(27, 94, 32);
+            pdf.setFillColor(240, 248, 240);
+            pdf.rect(30, yPos, 237, 20, 'FD');
+            
+            pdf.setFontSize(9);
+            pdf.setTextColor(27, 94, 32);
+            pdf.setFont(undefined, 'bold');
+            pdf.text('VALIDATION & ENROLLMENT SUMMARY', 35, yPos + 5);
+            
+            pdf.setFontSize(8);
+            pdf.setTextColor(100, 100, 100);
+            pdf.setFont(undefined, 'normal');
+            pdf.text('• Deadline for Claim: May 1 - July 30, 2026', 35, yPos + 10);
+            pdf.text('• Instructions: Present this certificate to the Marketing Office to finalize your enrollment.', 35, yPos + 15);
+
+            // Reference Number
+            pdf.setFontSize(9);
+            pdf.setTextColor(44, 62, 80);
+            pdf.setFont(undefined, 'bold');
+            pdf.text('Ref No:', 30, 175);
+            pdf.setFont(undefined, 'normal');
+            pdf.setFontSize(10);
+            pdf.text(refNumber, 30, 180);
+
+            // Signature (simplified representation)
             pdf.setDrawColor(27, 94, 32);
             pdf.setLineWidth(0.8);
-            // Draw a sample signature curve
-            pdf.line(220, 165, 230, 160);
-            pdf.line(230, 160, 240, 165);
-            pdf.line(240, 165, 250, 158);
-            pdf.line(250, 158, 260, 163);
-            pdf.line(260, 163, 270, 160);
+            pdf.line(220, 165, 230, 162);
+            pdf.line(230, 162, 240, 165);
+            pdf.line(240, 165, 250, 160);
+            pdf.line(250, 160, 260, 163);
+            pdf.line(260, 163, 270, 162);
 
             // Signature Line
             pdf.setLineWidth(0.5);
             pdf.line(220, 172, 270, 172);
-            pdf.setFontSize(8);
+            pdf.setFontSize(7);
             pdf.setTextColor(100, 100, 100);
-            pdf.text('AUTHORIZED SIGNATURE', 245, 178, { align: 'center' });
-
-            // Date stamp
-            pdf.setFontSize(8);
-            const today = new Date().toLocaleDateString('en-US', { 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
-            });
-            pdf.text(`Issued: ${today}`, 148.5, 195, { align: 'center' });
+            pdf.text('AUTHORIZED SIGNATURE', 245, 177, { align: 'center' });
 
             // Save PDF
-            pdf.save(`Certificate_${fullName.replace(/\s+/g, '_')}_${refNumber}.pdf`);
+            pdf.save(`Certificate_${fullName.replace(/\s+/g, '_')}_${refNumber.replace(/-/g, '')}.pdf`);
         });
-
-        // Helper function to load image
-        function loadImage(url) {
-            return new Promise((resolve, reject) => {
-                const img = new Image();
-                img.onload = () => resolve(img);
-                img.onerror = reject;
-                img.src = url;
-            });
-        }
     </script>
 </body>
 </html>
