@@ -257,7 +257,7 @@
             line-height: 1.8;
             margin: 25px auto;
             max-width: 700px;
-            text-align: left;
+            text-align: center;
         }
 
         .certificate-text strong {
@@ -266,8 +266,10 @@
 
         .benefits-list {
             list-style: none;
-            margin: 15px 0;
-            padding-left: 20px;
+            margin: 15px auto;
+            padding-left: 0;
+            max-width: 600px;
+            text-align: left;
         }
 
         .benefits-list li {
@@ -456,13 +458,13 @@
                         >
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Reference Number (16 characters)</label>
+                        <label class="form-label">Reference Number (13 characters)</label>
                         <input 
                             type="text" 
                             class="form-input" 
                             id="refNumber" 
-                            placeholder="e.g., ABCD-1234-EFGH-5678"
-                            maxlength="19"
+                            placeholder="e.g., ABCD-1234-EF567"
+                            maxlength="15"
                             required
                         >
                     </div>
@@ -530,16 +532,15 @@
                 <div class="certificate-footer">
                     <div class="ref-block">
                         <div class="ref-label">Ref No:</div>
-                        <div class="ref-number" id="certRef">____-____-____-____</div>
+                        <div class="ref-number" id="certRef">____-____-_____</div>
                     </div>
 
                     <div class="signature-block">
                         <div class="signature-image">
-                            <img id="signatureImg" src="signature (2).png" alt="Signature" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27200%27 height=%2760%27 viewBox=%270 0 200 60%27%3E%3Cpath d=%27M 10 40 Q 30 10, 50 40 T 90 40 Q 110 20, 130 40 T 170 40%27 stroke=%27%231B5E20%27 stroke-width=%272%27 fill=%27none%27 stroke-linecap=%27round%27/%3E%3C/svg%3E'">
+                            <img id="signatureImg" src="signature.png" alt="Signature" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27200%27 height=%2760%27 viewBox=%270 0 200 60%27%3E%3Cpath d=%27M 10 40 Q 30 10, 50 40 T 90 40 Q 110 20, 130 40 T 170 40%27 stroke=%27%231B5E20%27 stroke-width=%272%27 fill=%27none%27 stroke-linecap=%27round%27/%3E%3C/svg%3E'">
                         </div>
                         <div class="signature-line"></div>
-                        <div class="signature-label">Arjay A. Maniego, LPT, MA</div>
-                        <div class="signature-label">CRM Head</div>
+                        <div class="signature-label">Authorized Signature</div>
                     </div>
                 </div>
             </div>
@@ -562,13 +563,13 @@
         refNumberInput.addEventListener('input', function(e) {
             let value = e.target.value.replace(/[^A-Za-z0-9]/g, '').toUpperCase();
             
-            if (value.length > 16) {
-                value = value.substring(0, 16);
+            if (value.length > 13) {
+                value = value.substring(0, 13);
             }
             
             let formatted = '';
             for (let i = 0; i < value.length; i++) {
-                if (i > 0 && i % 4 === 0) {
+                if (i === 4 || i === 8) {
                     formatted += '-';
                 }
                 formatted += value[i];
@@ -590,10 +591,10 @@
                 return;
             }
 
-            // Validate reference number (should be 16 alphanumeric characters with dashes)
+            // Validate reference number (should be 13 alphanumeric characters with dashes)
             const cleanRef = refNumber.replace(/-/g, '');
-            if (cleanRef.length !== 16 || !/^[A-Z0-9]{16}$/.test(cleanRef)) {
-                alert('Reference number must be exactly 16 alphanumeric characters');
+            if (cleanRef.length !== 13 || !/^[A-Z0-9]{13}$/.test(cleanRef)) {
+                alert('Reference number must be exactly 13 alphanumeric characters');
                 return;
             }
 
@@ -654,33 +655,49 @@
             pdf.line(267, 195, 282, 195);
             pdf.line(282, 195, 282, 180);
 
+            // Try to add logo
+            try {
+                const logoImg = document.querySelector('.cert-logo img');
+                if (logoImg && logoImg.complete && logoImg.naturalHeight !== 0) {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = logoImg.naturalWidth;
+                    canvas.height = logoImg.naturalHeight;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(logoImg, 0, 0);
+                    const logoData = canvas.toDataURL('image/png');
+                    pdf.addImage(logoData, 'PNG', 133, 20, 30, 30);
+                }
+            } catch (e) {
+                console.log('Logo not added:', e);
+            }
+
             // School Name
             pdf.setFontSize(9);
             pdf.setTextColor(100, 100, 100);
-            pdf.text('MANUEL V. GALLEGO FOUNDATION COLLEGES INC.', 148.5, 30, { align: 'center' });
+            pdf.text('MANUEL V. GALLEGO FOUNDATION COLLEGES INC.', 148.5, 56, { align: 'center' });
 
             // Certificate Title
             pdf.setFontSize(26);
             pdf.setTextColor(27, 94, 32);
             pdf.setFont(undefined, 'bold');
-            pdf.text('CERTIFICATE OF CONFIRMATION', 148.5, 40, { align: 'center' });
+            pdf.text('CERTIFICATE OF CONFIRMATION', 148.5, 66, { align: 'center' });
 
             // Subtitle
             pdf.setFontSize(11);
             pdf.setTextColor(100, 100, 100);
             pdf.setFont(undefined, 'normal');
-            pdf.text('This certificate is proudly presented to:', 148.5, 48, { align: 'center' });
+            pdf.text('This certificate is proudly presented to:', 148.5, 74, { align: 'center' });
 
             // Recipient Name
             pdf.setFontSize(20);
             pdf.setTextColor(44, 62, 80);
             pdf.setFont(undefined, 'bold');
-            pdf.text(fullName, 148.5, 60, { align: 'center' });
+            pdf.text(fullName, 148.5, 86, { align: 'center' });
 
             // Underline
             pdf.setDrawColor(27, 94, 32);
             pdf.setLineWidth(0.5);
-            pdf.line(60, 62, 237, 62);
+            pdf.line(60, 88, 237, 88);
 
             // Certificate Text
             pdf.setFontSize(9);
@@ -695,13 +712,13 @@
                 'comprehensive benefits of the Alagang Gallegan program for the duration of their four-year degree, including:'
             ];
             
-            let yPos = 72;
+            let yPos = 98;
             textLines.forEach(line => {
                 pdf.text(line, 148.5, yPos, { align: 'center' });
                 yPos += 5;
             });
 
-            // Benefits
+            // Benefits - centered
             yPos += 2;
             const benefits = [
                 '• Free Academic Mentors and Coaches: Priority mentorship from dedicated academic mentors.',
@@ -712,7 +729,7 @@
             
             pdf.setFontSize(8);
             benefits.forEach(benefit => {
-                pdf.text(benefit, 30, yPos, { maxWidth: 237 });
+                pdf.text(benefit, 148.5, yPos, { align: 'center', maxWidth: 200 });
                 yPos += 5;
             });
 
@@ -725,18 +742,18 @@
             yPos += 8;
             pdf.setDrawColor(27, 94, 32);
             pdf.setFillColor(240, 248, 240);
-            pdf.rect(30, yPos, 237, 20, 'FD');
+            pdf.rect(48.5, yPos, 200, 20, 'FD');
             
             pdf.setFontSize(9);
             pdf.setTextColor(27, 94, 32);
             pdf.setFont(undefined, 'bold');
-            pdf.text('VALIDATION & ENROLLMENT SUMMARY', 35, yPos + 5);
+            pdf.text('VALIDATION & ENROLLMENT SUMMARY', 148.5, yPos + 5, { align: 'center' });
             
             pdf.setFontSize(8);
             pdf.setTextColor(100, 100, 100);
             pdf.setFont(undefined, 'normal');
-            pdf.text('• Deadline for Claim: May 1 - July 30, 2026', 35, yPos + 10);
-            pdf.text('• Instructions: Present this certificate to the Marketing Office to finalize your enrollment.', 35, yPos + 15);
+            pdf.text('• Deadline for Claim: May 1 - July 30, 2026', 148.5, yPos + 10, { align: 'center' });
+            pdf.text('• Instructions: Present this certificate to the Marketing Office to finalize your enrollment.', 148.5, yPos + 15, { align: 'center' });
 
             // Reference Number
             pdf.setFontSize(9);
@@ -747,14 +764,29 @@
             pdf.setFontSize(10);
             pdf.text(refNumber, 30, 180);
 
-            // Signature (simplified representation)
-            pdf.setDrawColor(27, 94, 32);
-            pdf.setLineWidth(0.8);
-            pdf.line(220, 165, 230, 162);
-            pdf.line(230, 162, 240, 165);
-            pdf.line(240, 165, 250, 160);
-            pdf.line(250, 160, 260, 163);
-            pdf.line(260, 163, 270, 162);
+            // Try to add signature
+            try {
+                const signImg = document.getElementById('signatureImg');
+                if (signImg && signImg.complete && signImg.naturalHeight !== 0) {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = signImg.naturalWidth;
+                    canvas.height = signImg.naturalHeight;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(signImg, 0, 0);
+                    const signData = canvas.toDataURL('image/png');
+                    pdf.addImage(signData, 'PNG', 220, 158, 50, 14);
+                }
+            } catch (e) {
+                console.log('Signature not added:', e);
+                // Fallback signature line
+                pdf.setDrawColor(27, 94, 32);
+                pdf.setLineWidth(0.8);
+                pdf.line(220, 165, 230, 162);
+                pdf.line(230, 162, 240, 165);
+                pdf.line(240, 165, 250, 160);
+                pdf.line(250, 160, 260, 163);
+                pdf.line(260, 163, 270, 162);
+            }
 
             // Signature Line
             pdf.setLineWidth(0.5);
@@ -769,4 +801,3 @@
     </script>
 </body>
 </html>
-
