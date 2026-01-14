@@ -152,18 +152,19 @@
             font-weight: 700;
             color: #2C3E50;
             font-family: Georgia, serif;
-            top: 42%;
+            top: 36.5%;
             left: 0;
             right: 0;
         }
 
         .ref-number {
-            font-size: 1.2vw;
+            font-size: 1vw;
             font-weight: 600;
             color: #2C3E50;
             font-family: 'Courier New', monospace;
-            top: 89%;
-            left: 25%;
+            top: 79.5%;
+            left: 12%;
+            text-align: left;
         }
 
         .download-btn {
@@ -191,10 +192,10 @@
 
         @media (max-width: 768px) {
             .student-name {
-                font-size: 4vw;
+                font-size: 3.5vw;
             }
             .ref-number {
-                font-size: 2vw;
+                font-size: 1.5vw;
             }
         }
     </style>
@@ -334,17 +335,17 @@
                 // Add background image
                 pdf.addImage(img, 'PNG', 0, 0, 297, 210);
 
-                // Add student name
-                pdf.setFontSize(28);
+                // Add student name (centered in the blank area)
+                pdf.setFontSize(26);
                 pdf.setTextColor(44, 62, 80);
                 pdf.setFont(undefined, 'bold');
-                pdf.text(fullName, 148.5, 95, { align: 'center' });
+                pdf.text(fullName, 148.5, 80, { align: 'center' });
 
-                // Add reference number
-                pdf.setFontSize(11);
+                // Add reference number (bottom left)
+                pdf.setFontSize(10);
                 pdf.setTextColor(44, 62, 80);
                 pdf.setFont(undefined, 'bold');
-                pdf.text(refNumber, 75, 188);
+                pdf.text(refNumber, 50, 175);
 
                 // Save PDF
                 pdf.save(`Certificate_of_Grant_${fullName.replace(/\s+/g, '_')}.pdf`);
