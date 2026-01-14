@@ -162,7 +162,7 @@
             font-weight: 600;
             color: #2C3E50;
             font-family: 'Courier New', monospace;
-            top: 92%;
+            top: 93.5%;
             right: 8%;
             width: auto;
             text-align: center;
@@ -336,17 +336,17 @@
                 // Add background image
                 pdf.addImage(img, 'PNG', 0, 0, 297, 210);
 
-                // Add student name (centered in the blank area)
-                pdf.setFontSize(24);
+                // Add student name (centered in the blank underlined area)
+                pdf.setFontSize(22);
                 pdf.setTextColor(44, 62, 80);
                 pdf.setFont(undefined, 'bold');
-                pdf.text(fullName, 148.5, 78, { align: 'center' });
+                pdf.text(fullName, 148.5, 87, { align: 'center' });
 
                 // Add reference number (bottom right under "ALAGANG GALLEGAN")
-                pdf.setFontSize(9);
+                pdf.setFontSize(8.5);
                 pdf.setTextColor(44, 62, 80);
                 pdf.setFont(undefined, 'bold');
-                pdf.text(refNumber, 238, 195, { align: 'center' });
+                pdf.text(refNumber, 235, 198, { align: 'center' });
 
                 // Save PDF
                 pdf.save(`Certificate_of_Grant_${fullName.replace(/\s+/g, '_')}.pdf`);
