@@ -349,7 +349,7 @@
                 pdf.text(refNumber, 235, 198, { align: 'center' });
 
                 // Save PDF
-                pdf.save(`Certificate_of_Grant_${fullName.replace(/\s+/g, '_')}.pdf`);
+                pdf.save(`COG-${refNumber}.pdf`);
             };
 
             img.onerror = function() {
@@ -361,3 +361,4 @@
     </script>
 </body>
 </html>
+
