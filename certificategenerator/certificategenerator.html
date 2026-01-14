@@ -336,11 +336,11 @@
                 // Add background image
                 pdf.addImage(img, 'PNG', 0, 0, 297, 210);
 
-                // Add student name (centered in the blank underlined area)
+                // Add student name (sitting closer to the underline)
                 pdf.setFontSize(22);
                 pdf.setTextColor(44, 62, 80);
                 pdf.setFont(undefined, 'bold');
-                pdf.text(fullName, 148.5, 87, { align: 'center' });
+                pdf.text(fullName, 148.5, 91, { align: 'center' });
 
                 // Add reference number (bottom right under "ALAGANG GALLEGAN")
                 pdf.setFontSize(8.5);
