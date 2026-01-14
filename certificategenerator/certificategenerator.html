@@ -143,28 +143,29 @@
 
         .overlay-text {
             position: absolute;
-            width: 100%;
             text-align: center;
         }
 
         .student-name {
-            font-size: 2.8vw;
+            font-size: 2.6vw;
             font-weight: 700;
             color: #2C3E50;
             font-family: Georgia, serif;
             top: 36.5%;
             left: 0;
             right: 0;
+            width: 100%;
         }
 
         .ref-number {
-            font-size: 1vw;
+            font-size: 0.9vw;
             font-weight: 600;
             color: #2C3E50;
             font-family: 'Courier New', monospace;
-            top: 79.5%;
-            left: 12%;
-            text-align: left;
+            top: 92%;
+            right: 8%;
+            width: auto;
+            text-align: center;
         }
 
         .download-btn {
@@ -192,10 +193,10 @@
 
         @media (max-width: 768px) {
             .student-name {
-                font-size: 3.5vw;
+                font-size: 3vw;
             }
             .ref-number {
-                font-size: 1.5vw;
+                font-size: 1.3vw;
             }
         }
     </style>
@@ -336,16 +337,16 @@
                 pdf.addImage(img, 'PNG', 0, 0, 297, 210);
 
                 // Add student name (centered in the blank area)
-                pdf.setFontSize(26);
+                pdf.setFontSize(24);
                 pdf.setTextColor(44, 62, 80);
                 pdf.setFont(undefined, 'bold');
-                pdf.text(fullName, 148.5, 80, { align: 'center' });
+                pdf.text(fullName, 148.5, 78, { align: 'center' });
 
-                // Add reference number (bottom left)
-                pdf.setFontSize(10);
+                // Add reference number (bottom right under "ALAGANG GALLEGAN")
+                pdf.setFontSize(9);
                 pdf.setTextColor(44, 62, 80);
                 pdf.setFont(undefined, 'bold');
-                pdf.text(refNumber, 50, 175);
+                pdf.text(refNumber, 238, 195, { align: 'center' });
 
                 // Save PDF
                 pdf.save(`Certificate_of_Grant_${fullName.replace(/\s+/g, '_')}.pdf`);
